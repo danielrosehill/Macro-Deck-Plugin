@@ -22,14 +22,27 @@ Store it where the user keeps secrets (their password manager), not in a plain f
 
 ## 2. Register with Claude Code
 
-User scope, so every project can use it:
+User scope, so every project can use it. Keep the token out of the config file: use a `headersHelper`, a command
+Claude Code runs on connect that prints the headers as JSON and reads the token from the user's secret store.
 
 ```bash
-claude mcp add --scope user --transport http macro-deck http://127.0.0.1:8193/mcp \
-  --header "Authorization: Bearer $MACRODECK_MCP_TOKEN"
+cat > ~/.local/bin/macro-deck-mcp-headers <<'EOF'
+#!/bin/sh
+# Prints {"Authorization": "Bearer <token>"}. Replace the token source with the user's own:
+#   op read "op://<vault>/<item>/credential"   (1Password)
+#   with-secrets sh -c 'echo "$MACRODECK_MCP_TOKEN"'   (an env injector)
+TOKEN=$(op read "op://<vault>/<item>/credential")
+printf '{"Authorization": "Bearer %s"}' "$TOKEN"
+EOF
+chmod +x ~/.local/bin/macro-deck-mcp-headers
+claude mcp add-json --scope user macro-deck \
+  "{\"type\":\"http\",\"url\":\"http://127.0.0.1:8193/mcp\",\"headersHelper\":\"$HOME/.local/bin/macro-deck-mcp-headers\"}"
+claude mcp get macro-deck    # Status: ✔ Connected
 ```
 
-The app also shows a ready-made `claude mcp add` line when the token is created. Tools load at the next session start.
+The app shows a ready-made `claude mcp add ... --header "Authorization: Bearer mdmcp_..."` line when the token is
+created; it works, but it writes the token into `~/.claude.json`. Prefer the helper. Tools load at the next session
+start; until then use `scripts/mdmcp.py` (stateless client, see `build-deck/references/schema-notes.md`).
 
 Fallback for clients without HTTP transport: the stdio bridge
 `MACRODECK_MCP_TOKEN=mdmcp_... <Macro Deck executable> mcp`.

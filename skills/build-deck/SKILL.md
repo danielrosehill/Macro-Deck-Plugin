@@ -25,6 +25,9 @@ Find the target app's control surface first (`ss -ltnp` for local ports, its doc
 
 ## 2. Learn the schemas (every build; they are versioned)
 
+Start from `references/schema-notes.md` (button data, flow and block format, entity-name traps, all confirmed on a
+real build); then confirm against the live host:
+
 - `catalog {kind: "widgetTypes"}`: each type's `defaultData` and `dataSchema` (use the button type).
 - `catalog {kind: "actions"}`: integration and action ids and their parameters. Pick the HTTP-request and run-program
   actions from the built-in integrations.
