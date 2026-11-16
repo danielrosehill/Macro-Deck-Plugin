@@ -54,6 +54,6 @@ In the widget `data` (see `build-deck/references/schema-notes.md`):
   portable name too (`"icon": "mdi:skip-next"`) plus `iconRef`, and look the id up again with `find_icon.py` on
   another host (`restore-decks`).
 - `iconColor` tints monochrome icons (MDI). Leave it unset for coloured packs.
-- Style that worked: one dark `backgroundColor` for every button, white icons, colour only for meaning (red Record,
+- Style to start from: one dark `backgroundColor` for every button, white icons, colour only for meaning (red Record,
   green Next), labels kept short.
 - Set either `icon` or `imageUrl`, not both: rebuild the button rather than adding `icon` next to an old `imageUrl`.
