@@ -67,6 +67,14 @@ Type `ActionButton`. `data` (schema `widget-data-action-button-v2`): `label`, `b
   Order the batch so every move lands on a free cell: first `update folder` to a grid big enough for both layouts
   (here 3 cols x 4 rows), then the moves, then shrink the folder to the final grid last. A button that needs two moves
   (a swap through a spare cell) goes in a second batch.
+- **Restyle in place:** `update widget {id, data: {positionX, positionY, width, height, data: {...}}}` replaces the widget's
+  `data` wholesale, so send the full data (label, icon, flows) with the changes; confirmed 2026-11-16, 3.0.2.
+- **Icon covered by the label** (the default draws the label over a full-face icon): set `labelPosition: "bottom"` and
+  `iconDisplay: {fit: "contain", zoom: 55, offsetY: -12}` (zoom %, offset % of the face). Confirmed 2026-11-16.
+- **Press triggers** are only `onShortPress`, `onLongPress`, `onDoublePress` (strings in `/usr/lib/Macro Deck`, 3.0.2):
+  no press-down/release pair, so a true hold-to-talk button is not possible; use a toggle.
+- **Icon packs:** the built-in "Included" pack (Lucide, 24 icons) is system glyphs only (mic, cpu, wifi, volume...), no
+  media controls; for transport buttons use an installed pack such as MDI-Icons.
 - **Phone layout:** the web client scales the whole grid to fit the screen, so on a phone held upright a 2-column grid
   gives buttons half the screen wide; 3x3 left them small (user feedback 2026-11-16). Put the most-used buttons in the
   bottom row (thumb reach) and destructive ones away from them.
