@@ -27,5 +27,6 @@ Reads the live state over the `macro-deck` MCP server and writes it into the dec
 
 Snapshots are for history and restore. To change a deck, edit `deck.json` and run `build-deck`.
 
-For a full-fidelity backup of everything (including secrets), point the user to the app's own encrypted backups
-(Settings → Backups, `.macroDeckBackup`) and keep the recovery key in their password manager. Do not put those files in git.
+For a full-fidelity backup of everything (including secrets), the user makes one in the app (Settings → Backups,
+`.macroDeckBackup`, encrypted with the recovery key) and `archive-backup` puts it in this repo. The recovery key stays in
+the user's password manager.

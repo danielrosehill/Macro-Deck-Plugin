@@ -17,6 +17,7 @@ buttons and action flows directly, with dry runs and undo.
 | `init-decks-repo` | Onboarding: create a private repo for your decks (`decks/<slug>/deck.json` specs, snapshots, `hosts/`) |
 | `build-deck` | Build or update a deck from a spec: schema discovery via `catalog`, dry run, apply, verify, record |
 | `save-decks` | Snapshot the live decks into the repo and push |
+| `archive-backup` | Copy an encrypted `.macroDeckBackup` into the decks repo, index it, check the recovery key is kept |
 | `restore-decks` | Recreate decks on a new or rebuilt host from the repo |
 
 Order on a new setup: `setup-host` → `connect-mcp` → `init-decks-repo` → `build-deck`.
