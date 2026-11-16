@@ -1,0 +1,12 @@
+{
+  "name": "macro-deck",
+  "version": "1.0.0",
+  "description": "Turn a phone into a macropad for host operations with Macro Deck 3: install the host, connect its MCP server, build decks from a spec, and keep decks in a private git repo.",
+  "author": {
+    "name": "Daniel Rosehill",
+    "url": "https://github.com/danielrosehill"
+  },
+  "repository": "https://github.com/danielrosehill/Macro-Deck-Plugin",
+  "license": "MIT",
+  "keywords": ["macro-deck", "macropad", "stream-deck", "android", "linux", "mcp", "host-operations"]
+}
