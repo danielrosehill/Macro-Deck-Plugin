@@ -48,7 +48,7 @@ Type `ActionButton`. `data` (schema `widget-data-action-button-v2`): `label`, `b
   `repeatLoop`, delays.
 - Parameter values: strings, numbers, booleans, `{"$var": name}`, `{"$secret": id}`, `{"$event": id}`, hotkeys
   `{modifiers, key, code}`. A `json` parameter's value is a JSON **string**.
-- Other press triggers exist besides `onShortPress` (long press etc.); check the source if a deck needs them
+- Other triggers exist besides `onShortPress`: see **Button triggers** under Writes. To re-check on a new version
   (`ui/runtime/src/domain/action-builder.interface.ts`, `host/src/MacroDeckHost.Application/Actions/TriggerSelector.cs`
   in github.com/Macro-Deck-App/Macro-Deck).
 - Useful built-in actions for host operations: `app.macro-deck.http/send-request`, `app.macro-deck.system/run-command`
@@ -71,8 +71,11 @@ Type `ActionButton`. `data` (schema `widget-data-action-button-v2`): `label`, `b
   `data` wholesale, so send the full data (label, icon, flows) with the changes; confirmed 2026-11-16, 3.0.2.
 - **Icon covered by the label** (the default draws the label over a full-face icon): set `labelPosition: "bottom"` and
   `iconDisplay: {fit: "contain", zoom: 55, offsetY: -12}` (zoom %, offset % of the face). Confirmed 2026-11-16.
-- **Press triggers** are only `onShortPress`, `onLongPress`, `onDoublePress` (strings in `/usr/lib/Macro Deck`, 3.0.2):
-  no press-down/release pair, so a true hold-to-talk button is not possible; use a toggle.
+- **Button triggers** (confirmed 2026-11-16, Macro Deck 3.0.2, from the editor's trigger list in the host's `wwwroot`
+  bundle, and a live deck built with them): `onShortPress` (Short press), `onLongPress` (Long press), `onTouchStart`
+  (Touch start), `onTouchEnd` (Touch end), `onDoublePress` (Double press). One button can carry several flows, one per
+  trigger. **Hold-to-talk works:** `onTouchStart` sends start, `onTouchEnd` sends stop (touch end also fires after a
+  long press). This corrects an earlier note here that said there was no press/release pair.
 - **Icon packs:** the built-in "Included" pack (Lucide, 24 icons) is system glyphs only (mic, cpu, wifi, volume...), no
   media controls; for transport buttons use an installed pack such as MDI-Icons.
 - **Phone layout:** the web client scales the whole grid to fit the screen, so on a phone held upright a 2-column grid
