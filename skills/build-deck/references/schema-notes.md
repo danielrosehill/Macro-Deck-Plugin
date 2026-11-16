@@ -62,6 +62,14 @@ Type `ActionButton`. `data` (schema `widget-data-action-button-v2`): `label`, `b
   while old buttons still sat outside it). Changes are checked in order. To relayout a deck, use one batch ordered:
   **delete every old widget → update the folder `rows`/`columns` → create the new widgets.** A failed apply is
   rolled back (`applied: false`).
+- **Relayout in place, keeping widget ids and flows** (confirmed 2026-11-16, Macro Deck 3.0.2, daniellaptop, 3x3 to 2x4):
+  `update widget {id, data: {positionX, positionY}}` moves a button and leaves its `data` (label, icon, flows) untouched.
+  Order the batch so every move lands on a free cell: first `update folder` to a grid big enough for both layouts
+  (here 3 cols x 4 rows), then the moves, then shrink the folder to the final grid last. A button that needs two moves
+  (a swap through a spare cell) goes in a second batch.
+- **Phone layout:** the web client scales the whole grid to fit the screen, so on a phone held upright a 2-column grid
+  gives buttons half the screen wide; 3x3 left them small (user feedback 2026-11-16). Put the most-used buttons in the
+  bottom row (thumb reach) and destructive ones away from them.
 - Icons: `data.icon = {"type": "icon-pack", "reference": <icon id>}` plus `iconColor`; see skill `icon-packs`.
 
 - `apply_changes` on any new HTTP/command block returns a `risky-action` confirmation; the batch still applies.
