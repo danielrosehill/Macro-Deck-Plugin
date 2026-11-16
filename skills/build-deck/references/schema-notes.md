@@ -81,6 +81,15 @@ Type `ActionButton`. `data` (schema `widget-data-action-button-v2`): `label`, `b
 - **Phone layout:** the web client scales the whole grid to fit the screen, so on a phone held upright a 2-column grid
   gives buttons half the screen wide; 3x3 left them small (user feedback 2026-11-16). Put the most-used buttons in the
   bottom row (thumb reach) and destructive ones away from them.
+- **Grid fit on a phone** (confirmed 2026-11-16, Companion 26.4.3, 6.7" phone held upright): cells are square and the
+  grid scales to the tighter of width and height. A 2x6 grid was height-bound and left grey margins at the sides;
+  2x5 makes every button about 28% bigger. Every row you add shrinks all buttons, so do not add a row for a rarely
+  used button. `update widget {id, data: {positionX, positionY, width, height}}` with no inner `data` resizes a
+  button and keeps its label, icon and flows.
+- **Switching profiles:** the deck client has no profile menu of its own; it opens the device's startup profile. Switch
+  from the host: Settings → Devices → the device → "Open profile on device…" (one-off) or "Startup profile…". The
+  `app.macro-deck.deck/change-profile` action (`profileId`, optional `deviceId`) does it from a button, but a switch
+  button costs a grid cell on every profile (user feedback 2026-11-16: it got in the way of a fast-use deck).
 - Icons: `data.icon = {"type": "icon-pack", "reference": <icon id>}` plus `iconColor`; see skill `icon-packs`.
 
 - `apply_changes` on any new HTTP/command block returns a `risky-action` confirmation; the batch still applies.

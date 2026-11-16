@@ -19,6 +19,7 @@ buttons and action flows directly, with dry runs and undo.
 | `icon-packs` | Find icons in installed packs (`scripts/find_icon.py`), install Store packs, put pack icons on buttons |
 | `save-decks` | Snapshot the live decks into the repo and push |
 | `archive-backup` | Copy an encrypted `.macroDeckBackup` into the decks repo, index it, check the recovery key is kept |
+| `adb-actions` | Put ADB actions for a connected Android device on buttons (`scripts/adb-deck.sh`, wireless reconnect) and keep a catalogue of confirmed actions |
 | `restore-decks` | Recreate decks on a new or rebuilt host from the repo |
 
 Order on a new setup: `setup-host` → `connect-mcp` → `init-decks-repo` → `build-deck`.
