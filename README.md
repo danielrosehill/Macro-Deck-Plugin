@@ -16,6 +16,7 @@ buttons and action flows directly, with dry runs and undo.
 | `connect-mcp` | Register the host's MCP server (`/mcp`, bearer token) with Claude Code and verify the nine tools |
 | `init-decks-repo` | Onboarding: create a private repo for your decks (`decks/<slug>/deck.json` specs, snapshots, `hosts/`) |
 | `build-deck` | Build or update a deck from a spec: schema discovery via `catalog`, dry run, apply, verify, record |
+| `icon-packs` | Find icons in installed packs (`scripts/find_icon.py`), install Store packs, put pack icons on buttons |
 | `save-decks` | Snapshot the live decks into the repo and push |
 | `archive-backup` | Copy an encrypted `.macroDeckBackup` into the decks repo, index it, check the recovery key is kept |
 | `restore-decks` | Recreate decks on a new or rebuilt host from the repo |

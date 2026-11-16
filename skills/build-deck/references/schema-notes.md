@@ -57,6 +57,13 @@ Type `ActionButton`. `data` (schema `widget-data-action-button-v2`): `label`, `b
 
 ## Writes
 
+- **Dry runs do not catch layout clashes.** A batch that passed `dryRun` failed on apply with `PositionOccupied`
+  (moving buttons onto each other's cells) and `Placement outside the folder grid` / `GridTooSmall` (grid resized
+  while old buttons still sat outside it). Changes are checked in order. To relayout a deck, use one batch ordered:
+  **delete every old widget → update the folder `rows`/`columns` → create the new widgets.** A failed apply is
+  rolled back (`applied: false`).
+- Icons: `data.icon = {"type": "icon-pack", "reference": <icon id>}` plus `iconColor`; see skill `icon-packs`.
+
 - `apply_changes` on any new HTTP/command block returns a `risky-action` confirmation; the batch still applies.
   It does not make the button wait for approval; only secret-using blocks wait for approval in the app.
 - Folder grid: `update folder {name, rows, columns}`. Profiles cannot be deleted over MCP.

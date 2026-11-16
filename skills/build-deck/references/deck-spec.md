@@ -43,6 +43,8 @@ A small, app-independent description of a deck. `build-deck` turns it into Macro
 | `profile` | Existing profile name to put the folder in (profiles cannot be deleted over MCP). |
 | `folder` | The deck. One folder per spec. |
 | `rows`, `columns` | Folder grid. Integers. |
+| `icon`, `iconRef`, `iconColor` | Portable name (`mdi:skip-next`), the pack icon id on the build host (skill `icon-packs`), tint. |
+| `size` | `[width, height]` in cells, default `[1, 1]`. Keep buttons equal unless there is a reason. |
 | `at` | `[row, column]`, zero-based → widget `positionY`, `positionX`. |
 | `action.kind` | `http` (preferred), `command`, `keys`, or `raw` (`{"integrationId", "actionId", "parameters"}` straight from `catalog`). |
 | secrets | Any value can be `{"$secret": "<label>"}`; `build-deck` resolves it with `set_secret`. Never a literal secret. |
