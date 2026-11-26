@@ -36,3 +36,7 @@ Standard adb commands wired into the script but not yet run from a deck button o
 - **`adb mdns services` can miss the phone** while `avahi-browse` sees it. The script uses avahi.
 - **Screenshots shown to an agent may be scaled.** Take tap and swipe coordinates from the device's real resolution
   (`adb shell wm size`), not from a downscaled image.
+- **Working out a tap target for a button:** if a [mobile-mcp](https://github.com/mobile-next/mobile-mcp) server is
+  connected to the device, read the element's coordinates from `mobile_list_elements_on_screen` (real screen pixels)
+  instead of a screenshot or `uiautomator dump`, which can return stale XML on some screens. The button itself still
+  runs `adb-deck.sh`: the deck host runs plain commands, not MCP tools. Don't put a secret in a `text` button.
